@@ -32,6 +32,11 @@ app.get('/', (req, res) =>{
     res.render('index');
 });
 
+app.post('/', (req, res) => {
+    console.log(res.body.name);
+    res.redirect('/');
+});
+
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
@@ -40,10 +45,7 @@ app.use(function (req, res, next) {
 
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+    res.status(404).json("Page not found");
 });
 
 
